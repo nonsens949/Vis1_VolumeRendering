@@ -60,6 +60,17 @@ void MainWindow::openFileAction()
 
 			// load file
 			success = m_VectorField->loadFromFile(filename, m_Ui->progressBar);
+
+			//calculate RayCasting
+			m_VolVis = new VolVis(m_Volume);
+			std::vector<float> density = m_VolVis->calculateRayCasting();
+
+			//render density to screen
+			
+
+
+
+
 		}
 		else if (fn.substr(fn.find_last_of(".") + 1) == "csv")		// LOAD MULTIVARIATE DATA
 		{

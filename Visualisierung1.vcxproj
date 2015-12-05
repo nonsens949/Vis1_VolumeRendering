@@ -149,6 +149,7 @@
     <ClCompile Include="src\Vector.cpp" />
     <ClCompile Include="src\VectorField.cpp" />
     <ClCompile Include="src\Volume.cpp" />
+    <ClCompile Include="VolVis.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\MainWindow.h">
@@ -180,6 +181,7 @@
     <ClInclude Include="src\Vector.h" />
     <ClInclude Include="src\VectorField.h" />
     <ClInclude Include="src\Volume.h" />
+    <ClInclude Include="VolVis.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="res\MainWindow.ui">
