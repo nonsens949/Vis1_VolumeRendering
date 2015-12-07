@@ -65,6 +65,7 @@ void MainWindow::openFileAction()
 			//calculate RayCasting
 			m_VolVis = new VolVis(m_Volume);
 			std::vector<float> densities = m_VolVis->calculateRayCasting();
+			// std::vector<float> densities = m_VolVis->calculateAlphaCompositing();
 
 
 			//set pixels to correct intensity on screen
@@ -85,7 +86,21 @@ void MainWindow::openFileAction()
 				}
 			}*/
 			
+
+			// zaehlt durch das densities array
+			int counter = 0;
+
+			for (int x = 0; x < m_Volume->width(); x++)
+			{
+				for (int y = 0; y < m_Volume->height(); y++)
+				{
+					int intensity = (int)(densities[counter] * 255);
+					setPixel(x, y, intensity);
+					counter++;
+				}
+			}
 			
+			/*
 			int iter = 0;
 			int size = densities.size();
 			for (int x = 0; x < m_Ui->DisplayWindow->width(); x++)
@@ -103,6 +118,7 @@ void MainWindow::openFileAction()
 					
 				}
 			}
+			*/
 			
 			
 
