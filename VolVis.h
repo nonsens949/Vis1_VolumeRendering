@@ -23,6 +23,7 @@ public:
 
 	std::vector<float> calculateRayCasting();
 	float getIntensityForWorldCoordinates(int x, int y, int z);
+	std::vector<float> calculateAlphaCompositing();
 };
 #endif
 
