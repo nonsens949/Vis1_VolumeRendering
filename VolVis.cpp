@@ -31,6 +31,11 @@ std::vector<float> VolVis::calculateRayCasting()
 	return density;
 }
 
+float VolVis::getIntensityForWorldCoordinates(int x, int y, int z)
+{
+	return act_volume->voxel(x, y, z).getValue();
+}
+
 //implemented Deconstructor
 VolVis::~VolVis()
 {

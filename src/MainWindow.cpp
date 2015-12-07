@@ -2,17 +2,21 @@
 
 #include <QFileDialog>
 
-#include <QPainter>
+
 
 
 MainWindow::MainWindow(QWidget *parent)
-	: QMainWindow(parent), m_Volume(0), m_VectorField(0)
+	: QMainWindow(parent), m_Volume(0), m_VectorField(0),
+	pixmap(1000, 500), painter(&pixmap), pen(QColor(0, 0, 0), 1, Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin), currentDensity(255)
 {
 	m_Ui = new Ui_MainWindow();
 	m_Ui->setupUi(this);
 
 	connect(m_Ui->actionOpen, SIGNAL(triggered()), this, SLOT(openFileAction()));
 	connect(m_Ui->actionClose, SIGNAL(triggered()), this, SLOT(closeAction()));
+
+	//initialize pixmap
+	painter.setPen(pen);
 }
 
 MainWindow::~MainWindow()
@@ -51,6 +55,37 @@ void MainWindow::openFileAction()
 
 			// load file
 			success = m_Volume->loadFromFile(filename, m_Ui->progressBar);
+
+			//render density to screen
+
+			//clear pixmap
+			clear();
+
+			//calculate RayCasting
+			m_VolVis = new VolVis(m_Volume);
+			std::vector<float> densities = m_VolVis->calculateRayCasting();
+
+
+			//set pixels to correct intensity on screen
+			for (int x = 0; x < m_Ui->DisplayWindow->width(); x++)
+			{
+				for (int y = 0; y < m_Ui->DisplayWindow->height(); y++)
+				{
+					Voxel& maxDensity = Voxel();
+					for (int z = 0; z < 100; z++)
+					{
+						if (m_Volume->voxel(x, y, z).operator>(maxDensity))
+						{
+							maxDensity = m_Volume->voxel(x, y, z);
+						}
+					}
+					int intensity = (int)(maxDensity.getValue() * 255);
+					setPixel(x, y, intensity);
+				}
+			}
+
+			//render
+			render();
 		}
 		else if (fn.substr(fn.find_last_of(".") + 1) == "gri")		// LOAD VECTORFIELD
 		{
@@ -60,16 +95,6 @@ void MainWindow::openFileAction()
 
 			// load file
 			success = m_VectorField->loadFromFile(filename, m_Ui->progressBar);
-
-			//calculate RayCasting
-			m_VolVis = new VolVis(m_Volume);
-			std::vector<float> density = m_VolVis->calculateRayCasting();
-
-			//render density to screen
-			
-
-
-
 
 		}
 		else if (fn.substr(fn.find_last_of(".") + 1) == "csv")		// LOAD MULTIVARIATE DATA
@@ -105,3 +130,33 @@ void MainWindow::closeAction()
 {
 	close();
 }
+
+//clear the pixmap
+void MainWindow::clear()
+{
+	//fill window with white color
+	pixmap.fill(QColor(255, 255, 255));
+}
+
+//sets the pixels on the screen
+void MainWindow::setPixel(int x, int y, int density)
+{
+	if (density != currentDensity)
+	{
+		pen.setColor(QColor(0, 0, 0, density));
+		painter.setPen(pen);
+		currentDensity = density;
+	}
+	//performs painting on widgets like QLabels
+	painter.drawPoint(x, y);
+	
+}
+
+//set pixmap to the right values
+void MainWindow::render()
+{
+	m_Ui->DisplayWindow->setPixmap(pixmap);
+}
+
+
+

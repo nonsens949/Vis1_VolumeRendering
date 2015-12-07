@@ -14,6 +14,8 @@
 #include <QProgressBar>
 #include <QStatusBar>
 #include <QVariant>
+#include <QBitmap>
+#include <QPainter>
 
 
 class MainWindow : public QMainWindow
@@ -24,7 +26,9 @@ class MainWindow : public QMainWindow
 
 		MainWindow(QWidget *parent = 0);
 		~MainWindow();
-
+		void								setPixel(int x, int y, int density = 255);
+		void								clear();
+		void								render();
 	
 	protected slots :
 
@@ -58,6 +62,10 @@ class MainWindow : public QMainWindow
 		VectorField							*m_VectorField;					// for Flow-Visualisation
 		MultiSet							*m_MultiSet;					// for Multivariate Data
 		VolVis								*m_VolVis;
+		QPixmap								pixmap;
+		QPainter							painter;
+		QPen								pen;
+		int									currentDensity;
 };
 
 #endif

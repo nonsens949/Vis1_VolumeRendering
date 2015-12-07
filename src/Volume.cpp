@@ -3,6 +3,11 @@
 #include <math.h>
 
 
+//DEBUG
+// basic file operations
+#include <iostream>
+#include <fstream>
+
 //-------------------------------------------------------------------------------------------------
 // Voxel
 //-------------------------------------------------------------------------------------------------
@@ -134,7 +139,17 @@ Volume::~Volume()
 
 const Voxel& Volume::voxel(const int x, const int y, const int z) const
 {
-	return m_Voxels[x + y*m_Width + z*m_Width*m_Height];
+	//return m_Voxels[x + y*m_Width + z*m_Width*m_Height];
+	if (0 <= x && x < m_Width &&
+		0 <= y && y < m_Height &&
+		0 <= z && z < m_Depth)
+	{
+		return m_Voxels[x + y*m_Width + z*m_Width*m_Height];
+	}
+	else
+	{
+		return Voxel();
+	}
 }
 
 const Voxel& Volume::voxel(const int i) const
@@ -236,7 +251,7 @@ bool Volume::loadFromFile(QString filename, QProgressBar* progressBar)
 		// data is converted to FLOAT values in an interval of [0.0 .. 1.0];
 		// uses 4095.0f to normalize the data, because only 12bit are used for the
 		// data values, and then 4095.0f is the maximum possible value
-		const float value = std::fmin(0.0f, float(vecData[i]) / 4095.0f);
+		const float value = std::fmax(0.0f, std::fmin(1.0f, float(vecData[i]) / 4095.0f));
 		m_Voxels[i] = Voxel(value);
 		
 		progressBar->setValue(10 + i);

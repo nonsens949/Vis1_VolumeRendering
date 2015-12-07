@@ -59,6 +59,19 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
+    <widget class="QLabel" name="DisplayWindow">
+      <property name="geometry">
+        <rect>
+          <x>0</x>
+          <y>50</y>
+          <width>1000</width>
+          <height>500</height>
+        </rect>
+      </property>
+      <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

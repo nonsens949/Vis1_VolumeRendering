@@ -33,6 +33,7 @@ public:
     QLabel *labelTop;
     QProgressBar *progressBar;
     QFrame *line;
+    QLabel *DisplayWindow;
     QMenuBar *menubar;
     QMenu *menuFile;
 
@@ -61,6 +62,10 @@ public:
         line->setGeometry(QRect(0, 50, 1011, 20));
         line->setFrameShape(QFrame::HLine);
         line->setFrameShadow(QFrame::Sunken);
+        DisplayWindow = new QLabel(centralwidget);
+        DisplayWindow->setObjectName(QStringLiteral("DisplayWindow"));
+        DisplayWindow->setGeometry(QRect(0, 50, 1000, 500));
+        DisplayWindow->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));

@@ -22,6 +22,7 @@ public:
 	Volume getVolume(){ return *act_volume; }
 
 	std::vector<float> calculateRayCasting();
+	float getIntensityForWorldCoordinates(int x, int y, int z);
 };
 #endif
 
