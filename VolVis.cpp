@@ -13,6 +13,7 @@ VolVis::VolVis(Volume *volume)
 std::vector<float> VolVis::calculateRayCasting()
 {
 	std::vector<float> density;
+	
 	for (int x = 0; x < act_width; x++)
 	{
 		for (int y = 0; y < act_height; y++)

@@ -2,6 +2,7 @@
 
 #include <QFileDialog>
 
+#include <iostream>
 
 
 
@@ -67,7 +68,7 @@ void MainWindow::openFileAction()
 
 
 			//set pixels to correct intensity on screen
-			for (int x = 0; x < m_Ui->DisplayWindow->width(); x++)
+	/*		for (int x = 0; x < m_Ui->DisplayWindow->width(); x++)
 			{
 				for (int y = 0; y < m_Ui->DisplayWindow->height(); y++)
 				{
@@ -82,7 +83,28 @@ void MainWindow::openFileAction()
 					int intensity = (int)(maxDensity.getValue() * 255);
 					setPixel(x, y, intensity);
 				}
+			}*/
+			
+			
+			int iter = 0;
+			int size = densities.size();
+			for (int x = 0; x < m_Ui->DisplayWindow->width(); x++)
+			{
+				float maxDensity = 0;
+				for (int y = 0; y < m_Ui->DisplayWindow->height(); y++)
+				{
+					float maxDensity = densities.at(iter);
+					int intensity = (int)(maxDensity * 255);
+					setPixel(x, y, intensity);
+					if (iter < 100){
+						iter++;
+					}
+					
+					
+				}
 			}
+			
+			
 
 			//render
 			render();
