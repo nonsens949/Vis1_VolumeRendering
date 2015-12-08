@@ -24,6 +24,10 @@ public:
 	std::vector<float> calculateRayCasting();
 	float getIntensityForWorldCoordinates(int x, int y, int z);
 	std::vector<float> calculateAlphaCompositing();
+	std::vector<float> centralDifferenceX();
+	std::vector<float> centralDifferenceY();
+	std::vector<float> centralDifferenceZ();
+	std::vector<float> calculateGradientLength();
 };
 #endif
 
