@@ -48,14 +48,14 @@ std::vector<float> VolVis::calculateAlphaCompositing()
 
 			// composed value
 			float alpha = 0.0;
-			for (int z = 0; alpha >= 1.0; z++)
+			for (int z = 0; alpha < 1.0 && z < act_depth; z++)
 			{
 				// TODO von vorne nach hinten die daten durchgehen und akkumulieren
 
 				// hier muss noch ein passender wert gefunden werden, mit dem die tansparenz angepasst werden kann 
 				// (der value muss noch mit einem wert multipliziert werden, mit ausprobieren)
 				// momentan beginnt die intensität bei 100 % und je weiter man nach hinten geht desto weniger wird cer value miteinbezogen (man koennte auch das gegenteil machen und das 1.0- weggeben)
-				alpha += act_volume->voxel(x, y, z).getValue() * (1.0 - z / act_depth);
+				alpha += act_volume->voxel(x, y, z).getValue() * ((1.0 - z / act_depth)*0.1);
 				if (alpha > 1.0) {
 					alpha = 1.0;
 				}
