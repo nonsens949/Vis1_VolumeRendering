@@ -66,27 +66,30 @@ void MainWindow::openFileAction()
 			m_VolVis = new VolVis(m_Volume);
 			// std::vector<float> densities = m_VolVis->calculateRayCasting();
 			std::vector<float> densities = m_VolVis->calculateAlphaCompositing();
+			// std::vector<float> lengths = m_VolVis->calculateGradientLength();
 
+			/*
+			int counter = densities.size()-1;
 
-			//set pixels to correct intensity on screen
-	/*		for (int x = 0; x < m_Ui->DisplayWindow->width(); x++)
+			for (int x = m_Volume->width(); x >= 0; x--)
 			{
-				for (int y = 0; y < m_Ui->DisplayWindow->height(); y++)
+				for (int y = m_Volume->height(); y >= 0; y--)
 				{
-					Voxel& maxDensity = Voxel();
-					for (int z = 0; z < 100; z++)
+					for (int z = m_Volume->depth(); z >= 0; z--)
 					{
-						if (m_Volume->voxel(x, y, z).operator>(maxDensity))
-						{
-							maxDensity = m_Volume->voxel(x, y, z);
-						}
-					}
-					int intensity = (int)(maxDensity.getValue() * 255);
-					setPixel(x, y, intensity);
-				}
-			}*/
-			
+						int intensity = (int)(densities[counter] * 255);
+						float length = lengths[counter];
+						counter--;
 
+						setColoredPixel(x, y, length, 0.0, 0.0, intensity);
+
+					}
+				}
+			}
+			*/
+
+			
+			
 			// zaehlt durch das densities array
 			int counter = 0;
 
@@ -99,26 +102,6 @@ void MainWindow::openFileAction()
 					counter++;
 				}
 			}
-			
-			/*
-			int iter = 0;
-			int size = densities.size();
-			for (int x = 0; x < m_Ui->DisplayWindow->width(); x++)
-			{
-				float maxDensity = 0;
-				for (int y = 0; y < m_Ui->DisplayWindow->height(); y++)
-				{
-					float maxDensity = densities.at(iter);
-					int intensity = (int)(maxDensity * 255);
-					setPixel(x, y, intensity);
-					if (iter < 100){
-						iter++;
-					}
-					
-					
-				}
-			}
-			*/
 			
 			
 
@@ -188,6 +171,20 @@ void MainWindow::setPixel(int x, int y, int density)
 	//performs painting on widgets like QLabels
 	painter.drawPoint(x, y);
 	
+}
+
+//sets the pixels on the screen
+void MainWindow::setColoredPixel(int x, int y, float r, float g, float b, int density)
+{
+	if (density != currentDensity)
+	{
+		pen.setColor(QColor(r, g, b, density));
+		painter.setPen(pen);
+		currentDensity = density;
+	}
+	//performs painting on widgets like QLabels
+	painter.drawPoint(x, y);
+
 }
 
 //set pixmap to the right values

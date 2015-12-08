@@ -27,6 +27,7 @@ class MainWindow : public QMainWindow
 		MainWindow(QWidget *parent = 0);
 		~MainWindow();
 		void								setPixel(int x, int y, int density = 255);
+		void								setColoredPixel(int x, int y, float r, float g, float b, int density = 255);
 		void								clear();
 		void								render();
 	

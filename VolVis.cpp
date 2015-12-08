@@ -121,6 +121,7 @@ std::vector<float> VolVis::centralDifferenceZ()
 	return z_value;
 }
 
+// returns a normalized length vektor [0.0, 1.0]
 std::vector<float> VolVis::calculateGradientLength()
 {
 	std::vector<float> lengths;
@@ -143,6 +144,16 @@ std::vector<float> VolVis::calculateGradientLength()
 				lengths.push_back(length);
 			}
 		}
+	}
+	float max = INFINITY;
+	int arraysize = lengths.size();
+	for (int j = 0; j < arraysize; j++){
+		if (max < lengths[j]){
+			max = lengths[j];
+		}
+	}
+	for (int i = 0; i < arraysize; i++) {
+		lengths[i] = lengths[i] / max;
 	}
 	return lengths;
 }
