@@ -66,7 +66,7 @@ void MainWindow::openFileAction()
 			m_VolVis = new VolVis(m_Volume);
 			// std::vector<float> densities = m_VolVis->calculateRayCasting();
 			std::vector<float> densities = m_VolVis->calculateAlphaCompositing();
-			std::vector<float> lengths = m_VolVis->calculateGradientLength();
+			// std::vector<float> lengths = m_VolVis->calculateGradientLength();
 
 			/*
 			int counter = densities.size()-1;
