@@ -66,7 +66,7 @@ void MainWindow::openFileAction()
 			m_VolVis = new VolVis(m_Volume);
 			// std::vector<float> densities = m_VolVis->calculateRayCasting();
 			std::vector<float> densities = m_VolVis->calculateAlphaCompositing();
-			// std::vector<float> lengths = m_VolVis->calculateGradientLength();
+			std::vector<float> lengths = m_VolVis->calculateGradientLength();
 
 			/*
 			int counter = densities.size()-1;
@@ -78,16 +78,17 @@ void MainWindow::openFileAction()
 					for (int z = m_Volume->depth(); z >= 0; z--)
 					{
 						int intensity = (int)(densities[counter] * 255);
-						float length = lengths[counter];
+						int length = (int)(lengths[counter] * 255);
 						counter--;
 
-						setColoredPixel(x, y, length, 0.0, 0.0, intensity);
+						setColoredPixel(x, y, length, 0, , intensity);
 
 					}
 				}
 			}
 			*/
 
+			
 			
 			
 			// zaehlt durch das densities array
@@ -174,7 +175,7 @@ void MainWindow::setPixel(int x, int y, int density)
 }
 
 //sets the pixels on the screen
-void MainWindow::setColoredPixel(int x, int y, float r, float g, float b, int density)
+void MainWindow::setColoredPixel(int x, int y, int r, int g, int b, int density)
 {
 	if (density != currentDensity)
 	{
