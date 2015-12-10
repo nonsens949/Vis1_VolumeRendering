@@ -13,7 +13,7 @@ VolVis::VolVis(Volume *volume)
 std::vector<float> VolVis::calculateRayCasting()
 {
 	std::vector<float> density;
-
+	
 	for (int x = 0; x < act_width; x++)
 	{
 		for (int y = 0; y < act_height; y++)
@@ -71,14 +71,20 @@ std::vector<float> VolVis::calculateAlphaCompositing()
 std::vector<float> VolVis::centralDifferenceX()
 {
 	std::vector<float> x_value;
-	for (int x = 1; x < act_width - 1; x++)
+	for (int x = 0; x < act_width; x++)
 	{
 		for (int y = 0; y < act_height; y++)
 		{
 			for (int z = 0; x < act_depth; z++)
 			{
-				float value = act_volume->voxel(x + 1, y, z).getValue() - act_volume->voxel(x - 1, y, z).getValue();
-				x_value.push_back(value);
+				// das erste und das letzte pixel in x-richtung kann nicht berechnet werden mit x+1 und x-1
+				if (x != 0 && x != act_width){
+					float value = act_volume->voxel(x + 1, y, z).getValue() - act_volume->voxel(x - 1, y, z).getValue();
+					x_value.push_back(value);
+				}
+				else {
+					x_value.push_back(0.0);
+				}
 			}
 		}
 	}
@@ -91,12 +97,19 @@ std::vector<float> VolVis::centralDifferenceY()
 	std::vector<float> y_value;
 	for (int x = 0; x < act_width; x++)
 	{
-		for (int y = 1; y < act_height - 1; y++)
+		for (int y = 0; y < act_height; y++)
 		{
 			for (int z = 0; x < act_depth; z++)
 			{
-				float value = act_volume->voxel(x, y + 1, z).getValue() - act_volume->voxel(x, y - 1, z).getValue();
-				y_value.push_back(value);
+				// das erste und das letzte pixel in y-richtung kann nicht berechnet werden mit y+1 und y-1
+				if (y != 0 && y != act_height){
+					float value = act_volume->voxel(x, y + 1, z).getValue() - act_volume->voxel(x, y - 1, z).getValue();
+					y_value.push_back(value);
+				}
+				else {
+					y_value.push_back(0.0);
+				}
+
 			}
 		}
 	}
@@ -111,17 +124,24 @@ std::vector<float> VolVis::centralDifferenceZ()
 	{
 		for (int y = 0; y < act_height; y++)
 		{
-			for (int z = 1; x < act_depth - 1; z++)
+			for (int z = 1; x < act_depth-1; z++)
 			{
-				float value = act_volume->voxel(x, y, z + 1).getValue() - act_volume->voxel(x, y, z - 1).getValue();
-				z_value.push_back(value);
+				// das erste und das letzte pixel in z-richtung kann nicht berechnet werden mit z+1 und z-1
+				if (z != 0 && z != act_depth) {
+					float value = act_volume->voxel(x, y, z + 1).getValue() - act_volume->voxel(x, y, z - 1).getValue();
+					z_value.push_back(value);
+				}
+				else
+				{
+					z_value.push_back(0.0);
+				}
 			}
 		}
 	}
 	return z_value;
 }
 
-// returns a normalized length vektor [0.0, 1.0]
+// returns a normalized length vector [0.0, 1.0]
 std::vector<float> VolVis::calculateGradientLength()
 {
 	std::vector<float> lengths;
@@ -142,10 +162,13 @@ std::vector<float> VolVis::calculateGradientLength()
 				float val_z = z_value[counter];
 				float length = sqrt(pow(val_x, 2) + pow(val_y, 2) + pow(val_z, 2));
 				lengths.push_back(length);
+				counter++;
 			}
 		}
 	}
-	float max = INFINITY;
+
+	// normalisieren
+	float max = 0;
 	int arraysize = lengths.size();
 	for (int j = 0; j < arraysize; j++){
 		if (max < lengths[j]){

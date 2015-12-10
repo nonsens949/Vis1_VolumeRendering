@@ -30,3 +30,7 @@ public:
 	std::vector<float> calculateGradientLength();
 };
 #endif
+
+
+
+
