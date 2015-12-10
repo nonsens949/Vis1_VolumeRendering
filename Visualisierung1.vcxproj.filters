@@ -37,10 +37,16 @@
     <ClCompile Include="src\MultiSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VolVis.cpp">
+    <ClCompile Include="src\VolVis.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DisplayWindow.cpp">
+    <ClCompile Include="src\DisplayWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GLWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGLWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,10 +74,16 @@
     <ClInclude Include="src\MultiSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VolVis.h">
+    <ClInclude Include="src\VolVis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DisplayWindow.h">
+    <ClInclude Include="src\DisplayWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GLWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

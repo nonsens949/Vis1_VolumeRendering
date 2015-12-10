@@ -68,28 +68,7 @@ void MainWindow::openFileAction()
 			std::vector<float> densities = m_VolVis->calculateAlphaCompositing();
 			// std::vector<float> lengths = m_VolVis->calculateGradientLength();
 
-			/*
-			int counter = densities.size()-1;
-
-			for (int x = m_Volume->width(); x >= 0; x--)
-			{
-				for (int y = m_Volume->height(); y >= 0; y--)
-				{
-					for (int z = m_Volume->depth(); z >= 0; z--)
-					{
-						int intensity = (int)(densities[counter] * 255);
-						float length = lengths[counter];
-						counter--;
-
-						setColoredPixel(x, y, length, 0.0, 0.0, intensity);
-
-					}
-				}
-			}
-			*/
-
-			
-			
+						
 			// zaehlt durch das densities array
 			int counter = 0;
 

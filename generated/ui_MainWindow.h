@@ -34,6 +34,7 @@ public:
     QProgressBar *progressBar;
     QFrame *line;
     QLabel *DisplayWindow;
+    QLabel *OpenGLWindow;
     QMenuBar *menubar;
     QMenu *menuFile;
 
@@ -64,8 +65,12 @@ public:
         line->setFrameShadow(QFrame::Sunken);
         DisplayWindow = new QLabel(centralwidget);
         DisplayWindow->setObjectName(QStringLiteral("DisplayWindow"));
-        DisplayWindow->setGeometry(QRect(0, 50, 1000, 500));
+        DisplayWindow->setGeometry(QRect(0, 70, 500, 500));
         DisplayWindow->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        OpenGLWindow = new QLabel(centralwidget);
+        OpenGLWindow->setObjectName(QStringLiteral("OpenGLWindow"));
+        OpenGLWindow->setGeometry(QRect(501, 50, 500, 500));
+        OpenGLWindow->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));

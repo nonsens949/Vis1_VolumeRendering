@@ -6,7 +6,7 @@
 #include "Volume.h"
 #include "VectorField.h"
 #include "MultiSet.h"
-#include "../VolVis.h"
+#include "VolVis.h"
 
 #include <QMainWindow>
 #include <QPushButton>

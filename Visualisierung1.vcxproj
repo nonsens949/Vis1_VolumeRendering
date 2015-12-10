@@ -142,15 +142,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DisplayWindow.cpp" />
     <ClCompile Include="generated\moc_MainWindow.cpp" />
+    <ClCompile Include="src\DisplayWindow.cpp" />
+    <ClCompile Include="src\GLWidget.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MainWindow.cpp" />
     <ClCompile Include="src\MultiSet.cpp" />
+    <ClCompile Include="src\OpenGLWindow.cpp" />
     <ClCompile Include="src\Vector.cpp" />
     <ClCompile Include="src\VectorField.cpp" />
     <ClCompile Include="src\Volume.cpp" />
-    <ClCompile Include="VolVis.cpp" />
+    <ClCompile Include="src\VolVis.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\MainWindow.h">
@@ -177,13 +179,15 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DisplayWindow.h" />
     <ClInclude Include="generated\ui_MainWindow.h" />
+    <ClInclude Include="src\DisplayWindow.h" />
+    <ClInclude Include="src\GLWidget.h" />
     <ClInclude Include="src\MultiSet.h" />
+    <ClInclude Include="src\OpenGLWindow.h" />
     <ClInclude Include="src\Vector.h" />
     <ClInclude Include="src\VectorField.h" />
     <ClInclude Include="src\Volume.h" />
-    <ClInclude Include="VolVis.h" />
+    <ClInclude Include="src\VolVis.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="res\MainWindow.ui">
